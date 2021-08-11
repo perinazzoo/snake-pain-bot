@@ -2,7 +2,7 @@ import 'dotenv/config'
 
 import { Client, Intents } from 'discord.js';
 
-import ServiceHandler from './services/ServiceHandler';
+import ServiceHandler from './services';
 
 import './setupSlashCommands';
 import './database';

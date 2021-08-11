@@ -1,23 +1,25 @@
 import { CommandInteraction } from 'discord.js';
+import SetChannelServiceHandler from './channel';
 
-import SetServiceHandler from './SetServiceHandler';
-
-import { IServiceHandler } from './';
+export interface IServiceHandler {
+  [key: string]: Function
+}
 
 class ServiceHandler {
-  services: IServiceHandler
+  services: IServiceHandler;
   interaction: CommandInteraction;
   constructor(interaction: CommandInteraction) {
     this.interaction = interaction;
     this.services = {
-      definir(): void {
-        new SetServiceHandler(interaction);
+      canal(): void {
+        new SetChannelServiceHandler(interaction);
       }
     }
+    void this.execute();
   }
-  
+
   public execute(): Function {
-    return this.services[this.interaction.commandName]
+    return this.services[this.interaction.commandName];
   }
 }
 

@@ -1,9 +1,9 @@
 import { CommandInteraction } from "discord.js";
 import { getMongoRepository } from "typeorm";
 
-import { Channel } from "../../../entities/Channel";
+import { Channel } from "../../entities/channel";
 
-class SetCoffeeChannelService {
+class CoffeeChannelService {
   interaction: CommandInteraction;
   constructor(interaction: CommandInteraction) {
     this.interaction = interaction;
@@ -39,4 +39,4 @@ class SetCoffeeChannelService {
   }
 }
 
-export default SetCoffeeChannelService;
+export default CoffeeChannelService;

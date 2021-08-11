@@ -1,9 +1,9 @@
 import { CommandInteraction } from "discord.js";
 
-import { IServiceHandler } from "../..";
-import SetCoffeeChannelService from "./SetCoffeeChannelService";
+import { IServiceHandler } from "..";
+import SetCoffeeChannelService from "./coffeeChannelService";
 
-class SetChannelServiceHandler {
+class ChannelServiceHandler {
   interaction: CommandInteraction
   services: IServiceHandler
   constructor(interaction: CommandInteraction) {
@@ -28,4 +28,4 @@ class SetChannelServiceHandler {
   }
 }
 
-export default SetChannelServiceHandler;
+export default ChannelServiceHandler;
