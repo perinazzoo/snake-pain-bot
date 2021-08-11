@@ -1,5 +1,5 @@
 import { CommandInteraction } from 'discord.js';
-import SetChannelServiceHandler from './channel';
+import SetChannelServiceHandler from './channel/channelServices';
 
 export interface IServiceHandler {
   [key: string]: Function
