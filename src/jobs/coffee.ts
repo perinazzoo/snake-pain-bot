@@ -1,5 +1,6 @@
 import { CronJob } from 'cron'
 import { getMongoRepository } from "typeorm";
+import { Channel as DiscordChannel } from "discord.js";
 
 import { User } from '../entities/user';
 import { Channel } from '../entities/channel';
@@ -7,12 +8,20 @@ import random from '../utils/random';
 import app from '../app';
 
 class CoffeeJob {
-  constructor() {
-    this.execute();
-  } 
+  channel: DiscordChannel
 
-  private execute() {
+  public start() {
     new CronJob('* * * * *', async () => {
+      await this.execute();
+    },
+    null,
+    true,
+    'America/Sao_Paulo'
+    )
+  }
+
+  private async execute() {
+    try {
       const userRepository = getMongoRepository(User);
       const channelRepository = getMongoRepository(Channel);
 
@@ -21,6 +30,7 @@ class CoffeeJob {
       });
 
       const channel = app.client.channels.cache.get(channelId);
+      this.channel = channel;
 
       let users = await userRepository.find({
         where: {
@@ -55,12 +65,11 @@ class CoffeeJob {
         }
       );
 
-      channel.send(`o sorteado foi ${discordUser.toString()}`);
-    },
-    null,
-    true,
-    'America/Sao_Paulo'
-    )
+      channel.send(`o felizardo foi ${discordUser.toString()}`);
+    } catch (err) {
+      this.channel.send('erro ao sortear o caboclo, tentando novamente');
+      this.execute();
+    }
   }
 }
 

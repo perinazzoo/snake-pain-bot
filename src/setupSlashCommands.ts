@@ -7,10 +7,9 @@ class SetupSlashCommands {
   private rest: REST
   constructor() {
     this.rest = new REST({ version: '9' }).setToken(process.env.TOKEN);
-    void this.execute();
   }
 
-  private async execute(): Promise<void> {
+  public async execute(): Promise<void> {
     try {
       console.log('Started refreshing application (/) commands.');
   
@@ -34,8 +33,8 @@ class SetupSlashCommands {
       )
   
       console.log('Successfully reloaded application (/) commands.');
-    } catch (error) {
-      console.error(error);
+    } catch (err) {
+      console.error(err);
     }
   }
 }

@@ -2,11 +2,8 @@ import { createConnection, getConnectionOptions, ConnectionOptions } from 'typeo
 import CoffeeJob from '../jobs/coffee'
 class Database {
   private defaultOptions: ConnectionOptions
-  constructor () {
-    void this.execute()
-  }
 
-  private async execute (): Promise<void> {
+  public async execute (): Promise<void> {
     try {
       this.defaultOptions = await getConnectionOptions()
       await createConnection(this.defaultOptions)
