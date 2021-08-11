@@ -14,7 +14,7 @@ class CoffeeChannelService {
   private async execute() {
     const channelRepository = getMongoRepository(Channel);
 
-    const discordChannel = this.interaction.options.getChannel('canal')
+    const discordChannel = this.interaction.options.getChannel('canal');
 
     if (discordChannel.type !== 'GUILD_TEXT') {
       return this.interaction.reply('\\❌ seleciona um canal de texto aí seu animal')
@@ -22,11 +22,11 @@ class CoffeeChannelService {
 
     await channelRepository.findOneAndUpdate(
       {
-        name: this.interaction.options.getSubcommand(),
+        name: this.interaction.commandName,
       },
       {
         $set: {
-          name: this.interaction.options.getSubcommand(),
+          name: this.interaction.commandName,
           channelId: discordChannel.id
         }
       },

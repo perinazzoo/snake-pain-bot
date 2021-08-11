@@ -1,5 +1,5 @@
 import { CommandInteraction } from 'discord.js';
-import SetChannelServiceHandler from './channel/channelServices';
+import CoffeeServices from './coffee/coffeeServices';
 
 export interface IServiceHandler {
   [key: string]: Function
@@ -11,8 +11,8 @@ class ServiceHandler {
   constructor(interaction: CommandInteraction) {
     this.interaction = interaction;
     this.services = {
-      canal(): void {
-        new SetChannelServiceHandler(interaction);
+      cafe(): void {
+        new CoffeeServices(interaction);
       }
     }
     void this.execute();

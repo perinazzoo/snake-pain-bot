@@ -1,7 +1,7 @@
 import { Entity, ObjectID, ObjectIdColumn, Column } from "typeorm";
 
-@Entity({ name: 'channels' })
-export class Channel {
+@Entity({ name: 'users' })
+export class User {
 
     @ObjectIdColumn()
     id: ObjectID;
@@ -10,5 +10,5 @@ export class Channel {
     name: string;
 
     @Column()
-    channelId: string;
+    userId: string;
 }
