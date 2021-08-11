@@ -65,7 +65,7 @@ class CoffeeJob {
         }
       );
 
-      channel.send(`o felizardo foi ${discordUser.toString()}`);
+      channel.send(`🐽 seu dia de limpeza chegou ${discordUser.toString()}`);
     } catch (err) {
       this.channel.send('erro ao sortear o caboclo, tentando novamente');
       this.execute();
