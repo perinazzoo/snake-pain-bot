@@ -35,7 +35,7 @@ class SetCoffeeChannelService {
       }
     );
 
-    this.interaction.reply(`canal do ${this.interaction.options.getSubcommand()} definido como ${discordChannel.toString()} com sucesso`)
+    this.interaction.reply(`vou cobrar a limpeza do cafofo do café no canal ${discordChannel.toString()}`)
   }
 }
 
