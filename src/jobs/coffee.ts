@@ -11,7 +11,7 @@ class CoffeeJob {
   channel: DiscordChannel
 
   public start() {
-    new CronJob('* * * * *', async () => {
+    new CronJob('30 15 * * *', async () => {
       await this.execute();
     },
     null,
