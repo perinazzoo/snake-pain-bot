@@ -35,7 +35,7 @@ class CoffeeChannelService {
       }
     );
 
-    this.interaction.reply(`vou cobrar a limpeza do cafofo do café no canal ${discordChannel.toString()}`)
+    this.interaction.reply(`vou gerenciar a limpeza do cafofo do café no canal ${discordChannel.toString()}`)
   }
 }
 
