@@ -11,4 +11,7 @@ export class User {
 
     @Column()
     userId: string;
+
+    @Column('boolean')
+    doneThisRound?: boolean
 }

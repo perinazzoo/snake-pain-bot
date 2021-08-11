@@ -4,8 +4,9 @@ import { Client, Intents } from 'discord.js';
 
 import ServiceHandler from './services';
 
-import './setupSlashCommands';
 import './database';
+import './setupSlashCommands';
+import './jobs/coffee';
 
 class App {
   public readonly client: Client
