@@ -9,7 +9,7 @@ class SetupSlashCommands {
     this.rest = new REST({ version: '9' }).setToken(process.env.TOKEN);
   }
 
-  public async execute(): Promise<void> {
+  public async execute (): Promise<void> {
     try {
       console.log('Started refreshing application (/) commands.');
   

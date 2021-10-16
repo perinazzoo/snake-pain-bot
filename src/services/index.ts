@@ -18,7 +18,7 @@ class ServiceHandler {
     void this.execute();
   }
 
-  public execute(): Function {
+  public execute (): Function {
     return this.services[this.interaction.commandName];
   }
 }

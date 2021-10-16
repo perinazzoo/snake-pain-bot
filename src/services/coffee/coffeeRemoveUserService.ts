@@ -1,5 +1,4 @@
 import { CommandInteraction } from "discord.js";
-import { getMongoRepository } from "typeorm";
 
 import { User } from "../../entities/user";
 
@@ -11,16 +10,14 @@ class CoffeeRemoveUserService {
     void this.execute();
   }
 
-  private async execute() {
-    const userRepository = getMongoRepository(User);
-
+  private async execute () {
     const discordUser = this.interaction.options.getUser('usuario');
 
     if (discordUser.bot) {
       return await this.interaction.reply('\\❌ seleciona uma pessoa e não um bot seu animal');
     }
 
-    const user = await userRepository.findOne({
+    const user = await User.repository.findOne({
       userId: discordUser.id,
     });
 
@@ -28,7 +25,7 @@ class CoffeeRemoveUserService {
       return await this.interaction.reply('\\❌ esse usuário não ta na lista caralho');
     }
 
-    await userRepository.delete(user);
+    await User.repository.delete(user);
 
     return await this.interaction.reply(`beleza, removi o ${discordUser.toString()} lá da lista de limpeza do cafofo do café`)
   }

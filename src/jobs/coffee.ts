@@ -1,6 +1,5 @@
 import { CronJob } from 'cron'
-import { getMongoRepository } from "typeorm";
-import { Channel as DiscordChannel } from "discord.js";
+import { Channel as DiscordChannel, TextBasedChannels } from "discord.js";
 
 import { User } from '../entities/user';
 import { Channel } from '../entities/channel';
@@ -22,28 +21,24 @@ class CoffeeJob {
 
   private async execute() {
     try {
-      const userRepository = getMongoRepository(User);
-      const channelRepository = getMongoRepository(Channel);
-
-      const { channelId } = await channelRepository.findOne({
+      const { channelId } = await Channel.repository.findOne({
         name: 'cafe'
       });
 
-      const channel = app.client.channels.cache.get(channelId);
-      this.channel = channel;
+      this.channel = app.client.channels.cache.get(channelId);
 
-      let users = await userRepository.find({
+      let users = await User.repository.find({
         where: {
           $or: [{ doneThisRound: false }, { doneThisRound: null }]
         }
       });
 
       if (!users || users.length <= 0) {
-        await userRepository.update({}, {
+        await User.repository.update({}, {
           doneThisRound: false
         })
 
-        users = await userRepository.find({
+        users = await User.repository.find({
           where: {
             $or: [{ doneThisRound: false }, { doneThisRound: null }]
           }
@@ -54,7 +49,7 @@ class CoffeeJob {
 
       const discordUser = await app.client.users.fetch(randomUser.userId);
 
-      await userRepository.findOneAndUpdate(
+      await User.repository.findOneAndUpdate(
         {
           userId: randomUser.userId,
         },
@@ -65,9 +60,13 @@ class CoffeeJob {
         }
       );
 
-      channel.send(`🐽 seu dia de limpeza chegou ${discordUser.toString()}`);
+      if (this.channel.isText()) {
+        this.channel.send(`🐽 seu dia de limpeza chegou ${discordUser.toString()}`);
+      }
     } catch (err) {
-      this.channel.send('erro ao sortear o caboclo, tentando novamente');
+      if (this.channel.isText()) {
+        this.channel.send('erro ao sortear o caboclo, tentando novamente');
+      }
       this.execute();
     }
   }

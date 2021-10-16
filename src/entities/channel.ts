@@ -1,4 +1,4 @@
-import { Entity, ObjectID, ObjectIdColumn, Column } from "typeorm";
+import { Entity, ObjectID, ObjectIdColumn, Column, getMongoRepository } from "typeorm";
 
 @Entity({ name: 'channels' })
 export class Channel {
@@ -11,4 +11,8 @@ export class Channel {
 
     @Column()
     channelId: string;
+
+    public static get repository () {
+        return getMongoRepository(Channel)
+    }
 }

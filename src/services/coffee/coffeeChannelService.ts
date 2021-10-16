@@ -1,5 +1,4 @@
 import { CommandInteraction } from "discord.js";
-import { getMongoRepository } from "typeorm";
 
 import { Channel } from "../../entities/channel";
 
@@ -11,16 +10,14 @@ class CoffeeChannelService {
     void this.execute();
   }
 
-  private async execute() {
-    const channelRepository = getMongoRepository(Channel);
-
+  private async execute () {
     const discordChannel = this.interaction.options.getChannel('canal');
 
     if (discordChannel.type !== 'GUILD_TEXT') {
       return this.interaction.reply('\\❌ seleciona um canal de texto aí seu animal')
     }
 
-    await channelRepository.findOneAndUpdate(
+    await Channel.repository.findOneAndUpdate(
       {
         name: this.interaction.commandName,
       },

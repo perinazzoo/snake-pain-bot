@@ -1,4 +1,4 @@
-import { Entity, ObjectID, ObjectIdColumn, Column } from "typeorm";
+import { Entity, ObjectID, ObjectIdColumn, Column, getMongoRepository } from "typeorm";
 
 @Entity({ name: 'users' })
 export class User {
@@ -14,4 +14,8 @@ export class User {
 
     @Column('boolean')
     doneThisRound?: boolean
+
+    public static get repository () {
+        return getMongoRepository(User)
+    }
 }

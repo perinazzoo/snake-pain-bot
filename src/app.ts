@@ -15,7 +15,7 @@ class App {
     void this.execute();
   }
 
-  private async execute() {
+  private async execute () {
     try {
       this.client.on('ready', () => {
         console.log(`Logged in as ${this.client.user.tag}!`);

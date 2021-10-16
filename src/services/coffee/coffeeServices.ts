@@ -25,7 +25,7 @@ class CoffeeServices {
     void this.execute();
   }
 
-  private async execute() {
+  private async execute () {
     const service = this.services[this.interaction.options.getSubcommand()] || this.services[this.interaction.options.getSubcommand() + this.interaction.options.getSubcommandGroup()];
 
     if (!service) {
