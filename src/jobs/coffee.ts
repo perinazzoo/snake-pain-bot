@@ -36,7 +36,7 @@ class CoffeeJob {
       if (!users || users.length <= 0) {
         await User.repository.update({}, {
           doneThisRound: false
-        })
+        }) 
 
         users = await User.repository.find({
           where: {
