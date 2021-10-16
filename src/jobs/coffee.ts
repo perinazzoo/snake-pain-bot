@@ -1,5 +1,5 @@
 import { CronJob } from 'cron'
-import { Channel as DiscordChannel, TextBasedChannels } from "discord.js";
+import { Channel as DiscordChannel, Message, TextBasedChannels } from "discord.js";
 
 import { User } from '../entities/user';
 import { Channel } from '../entities/channel';
@@ -27,6 +27,10 @@ class CoffeeJob {
 
       this.channel = app.client.channels.cache.get(channelId);
 
+      if (!this.channel.isText()) {
+          throw new Error('Canal não é de voz')
+      }
+
       let users = await User.repository.find({
         where: {
           $or: [{ doneThisRound: false }, { doneThisRound: null }]
@@ -34,6 +38,7 @@ class CoffeeJob {
       });
 
       if (!users || users.length <= 0) {
+        await this.channel.send('a lista dos caboclo chegou ao fim, resetando...')
         await User.repository.update({}, {
           doneThisRound: false
         }) 
@@ -60,12 +65,10 @@ class CoffeeJob {
         }
       );
 
-      if (this.channel.isText()) {
-        this.channel.send(`🐽 seu dia de limpeza chegou ${discordUser.toString()}`);
-      }
+      await this.channel.send(`🐽 seu dia de limpeza chegou ${discordUser.toString()}`);
     } catch (err) {
       if (this.channel.isText()) {
-        this.channel.send('erro ao sortear o caboclo, tentando novamente');
+        await this.channel.send('erro ao sortear o caboclo, tentando novamente');
       }
       this.execute();
     }
