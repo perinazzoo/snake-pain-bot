@@ -1,5 +1,4 @@
 const env = process.env.NODE_ENV === 'production' ? 'build' : 'src'
-console.log(env)
 
 module.exports = {
   "type": "mongodb",
