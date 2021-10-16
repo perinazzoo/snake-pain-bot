@@ -1,3 +1,6 @@
+const env = process.env.NODE_ENV === 'production' ? 'build' : 'src'
+console.log(env)
+
 module.exports = {
   "type": "mongodb",
   "url": `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@${process.env.MONGO_HOST}/${process.env.MONGO_DB}?retryWrites=true&w=majority`,
@@ -7,17 +10,17 @@ module.exports = {
   "synchronize": true,
   "logging": false,
   "entities": [
-    "src/entities/**/*.ts"
+    `${env}/entities/**/*.ts`,
   ],
   "migrations": [
-    "src/database/migrations/**/*.ts"
+    `${env}/database/migrations/**/*.ts`,
   ],
   "subscribers": [
-    "src/subscribers/**/*.ts"
+    `${env}/subscribers/**/*.ts`,
   ],
   "cli": {
-    "entitiesDir": "src/entity",
-    "migrationsDir": "src/database/migration",
-    "subscribersDir": "src/subscriber"
+    "entitiesDir": `${env}/entity`,
+    "migrationsDir": `${env}/database/migration`,
+    "subscribersDir": `${env}/subscriber`
   }
 }
