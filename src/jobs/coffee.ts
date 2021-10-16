@@ -43,7 +43,7 @@ class CoffeeJob {
         message = await this.channel.send('Todos da lista foram sorteados, resetando lista...')
         await User.repository.update({}, {
           doneThisRound: false
-        })
+        }) 
 
         users = await User.repository.find({
           where: {
