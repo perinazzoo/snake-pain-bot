@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc --skipLibCheck",
     "dev": "ts-node-dev --inspect --transpile-only ./src/app.ts",
     "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js",
     "test": "cross-env NODE_ENV=test jest"
