@@ -25,9 +25,10 @@ class CoffeeJob {
         name: 'cafe'
       });
 
-      this.channel = app.client.channels.cache.get(channelId);
+      const channel = app.client.channels.cache.get(channelId);
+      this.channel = channel
 
-      if (!this.channel.isText()) {
+      if (!channel.isText()) {
           throw new Error('Canal não é de voz')
       }
 
@@ -38,7 +39,7 @@ class CoffeeJob {
       });
 
       if (!users || users.length <= 0) {
-        await this.channel.send('a lista dos caboclo chegou ao fim, resetando...')
+        await channel.send('a lista dos caboclo chegou ao fim, resetando...')
         await User.repository.update({}, {
           doneThisRound: false
         }) 
@@ -65,7 +66,7 @@ class CoffeeJob {
         }
       );
 
-      await this.channel.send(`🐽 seu dia de limpeza chegou ${discordUser.toString()}`);
+      await channel.send(`🐽 seu dia de limpeza chegou ${discordUser.toString()}`);
     } catch (err) {
       if (this.channel.isText()) {
         await this.channel.send('erro ao sortear o caboclo, tentando novamente');
