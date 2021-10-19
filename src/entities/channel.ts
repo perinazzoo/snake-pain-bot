@@ -13,6 +13,6 @@ export class Channel {
     channelId: string;
 
     public static get repository () {
-        return getMongoRepository(Channel)
+        return getMongoRepository(this)
     }
 }

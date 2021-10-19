@@ -1,4 +1,10 @@
-const env = process.env.NODE_ENV === 'production' ? 'build' : 'src'
+const env = process.env.NODE_ENV === 'production' ? {
+    prefix: 'build',
+    suffix: 'js'
+} : {
+    prefix: 'src',
+    suffix: 'ts'
+}
 
 module.exports = {
   "type": "mongodb",
@@ -9,17 +15,17 @@ module.exports = {
   "synchronize": true,
   "logging": false,
   "entities": [
-    `${env}/entities/**/*.ts`,
+    `${env.prefix}/entities/**/*.${env.suffix}`,
   ],
   "migrations": [
-    `${env}/database/migrations/**/*.ts`,
+    `${env.prefix}/database/migrations/**/*.${env.suffix}`,
   ],
   "subscribers": [
-    `${env}/subscribers/**/*.ts`,
+    `${env.prefix}/subscribers/**/*.${env.suffix}`,
   ],
   "cli": {
-    "entitiesDir": `${env}/entity`,
-    "migrationsDir": `${env}/database/migration`,
-    "subscribersDir": `${env}/subscriber`
+    "entitiesDir": `${env.prefix}/entity`,
+    "migrationsDir": `${env.prefix}/database/migration`,
+    "subscribersDir": `${env.prefix}/subscriber`
   }
 }

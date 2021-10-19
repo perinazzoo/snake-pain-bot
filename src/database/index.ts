@@ -7,10 +7,10 @@ class Database {
     try {
       this.defaultOptions = await getConnectionOptions()
       await createConnection(this.defaultOptions)
-      console.log('Banco de dados conectado com sucesso! 💺🎲')
+      console.log('Database connected! 💺🎲')
       new CoffeeJob();
     } catch (err) {
-      console.log('Erro ao conectar ao banco de dados 💺🎲❌: \n\n', err)
+      console.log('Error connecting to database 💺🎲❌: \n\n', err)
     }
   }
 }

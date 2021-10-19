@@ -16,6 +16,6 @@ export class User {
     doneThisRound?: boolean
 
     public static get repository () {
-        return getMongoRepository(User)
+        return getMongoRepository(this)
     }
 }
