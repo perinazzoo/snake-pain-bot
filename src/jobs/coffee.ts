@@ -10,7 +10,7 @@ class CoffeeJob {
   channel: DiscordChannel
 
   public start() {
-    new CronJob('30 15 * * 1,2,3,4,5', async () => {
+    new CronJob('45 15 * * 1,2,3,4,5', async () => {
       await this.execute();
     },
     null,
